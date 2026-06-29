@@ -1,0 +1,132 @@
+.order-success-page {
+  padding-top: 130px;
+  background-color: var(--color-cream);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 80px;
+}
+
+.success-content-card {
+  background-color: var(--color-white);
+  padding: 60px 40px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(78, 52, 46, 0.02);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.success-check-icon {
+  color: var(--color-gold);
+  margin-bottom: 24px;
+}
+
+.success-heading {
+  font-size: 2.2rem;
+  color: var(--color-dark-brown);
+}
+
+.success-para {
+  font-size: 0.95rem;
+  color: var(--color-brown-subtle);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.order-info-badge {
+  display: inline-flex;
+  flex-direction: column;
+  background-color: var(--color-cream);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  padding: 14px 28px;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 35px;
+}
+
+.info-badge-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-brown-subtle);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.info-badge-value {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-dark-brown);
+  letter-spacing: 1px;
+}
+
+/* Tips Box */
+.success-tips-box {
+  background-color: var(--color-cream);
+  border-radius: var(--border-radius-sm);
+  padding: 24px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.success-tips-box h4 {
+  font-size: 1rem;
+  color: var(--color-dark-brown);
+  margin-bottom: 12px;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--color-brown-subtle);
+  line-height: 1.4;
+}
+
+.tip-icon {
+  color: var(--color-gold);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Button Actions */
+.success-button-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.success-button-actions .btn {
+  padding: 12px 30px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 576px) {
+  .success-content-card {
+    padding: 40px 20px;
+  }
+  
+  .success-heading {
+    font-size: 1.8rem;
+  }
+  
+  .success-button-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .success-button-actions .btn {
+    width: 100%;
+  }
+}

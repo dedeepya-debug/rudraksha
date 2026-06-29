@@ -1,0 +1,79 @@
+.contact-page-container {
+  padding-top: 90px;
+  background-color: var(--color-cream);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.contact-page-banner {
+  background-color: var(--color-brown-darkest);
+  background-image: linear-gradient(rgba(39, 21, 16, 0.8), rgba(39, 21, 16, 0.85)), url('/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.contact-banner-title {
+  font-size: 2.8rem;
+  margin-top: 8px;
+}
+
+.contact-banner-desc {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 300;
+  opacity: 0.8;
+  max-width: 500px;
+  margin: 12px auto 0 auto;
+  line-height: 1.5;
+}
+
+/* Map widget */
+.map-embed-section {
+  margin-top: 40px;
+}
+
+.map-heading {
+  font-size: 1.8rem;
+  color: var(--color-dark-brown);
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 8px;
+}
+
+.map-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-gold);
+}
+
+.map-wrapper {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(78, 52, 46, 0.04);
+  overflow: hidden;
+  padding: 10px;
+}
+
+.map-wrapper iframe {
+  border-radius: var(--border-radius-sm);
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .contact-banner-title {
+    font-size: 2.2rem;
+  }
+}
