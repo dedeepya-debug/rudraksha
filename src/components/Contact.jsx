@@ -65,7 +65,7 @@ export default function Contact() {
                 </div>
                 <div className="info-text-box">
                   <span className="info-label">Address</span>
-                  <span className="info-value">Suite 740, Golden Weave Mansion, Textile Avenue, Mumbai, MH 400012</span>
+                  <span className="info-value"># Room No. 1, Vastrabharathi Cloth Market, Proddatur - 516 360, Kadapa District, Andhra Pradesh, India.</span>
                 </div>
               </li>
               <li>
@@ -74,7 +74,7 @@ export default function Contact() {
                 </div>
                 <div className="info-text-box">
                   <span className="info-label">Phone</span>
-                  <span className="info-value">+91 (22) 555-8291 / +91 (22) 555-8292</span>
+                  <span className="info-value">9441132208 </span>
                 </div>
               </li>
               <li>
@@ -83,7 +83,7 @@ export default function Contact() {
                 </div>
                 <div className="info-text-box">
                   <span className="info-label">Email</span>
-                  <span className="info-value">corporate@rudrakshatextiles.com</span>
+                  <span className="info-value">rudrakshasareescentre@gmail.com</span>
                 </div>
               </li>
               <li>
