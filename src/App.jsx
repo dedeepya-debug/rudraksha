@@ -1,44 +1,17 @@
-import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Products from './components/Products';
-import Gallery from './components/Gallery';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { Routes, Route } from "react-router-dom";
 
-export default function App() {
-  useEffect(() => {
-    // Scroll reveal observer
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const observerOptions = {
-      root: null, // use the viewport
-      threshold: 0.15, // trigger when 15% of the element is visible
-      rootMargin: '0px 0px -50px 0px' // slightly offset triggering
-    };
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          // Once animated, we don't need to observe it anymore
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Products from "./components/Products";
+import Gallery from "./components/Gallery";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-    revealElements.forEach(element => {
-      revealObserver.observe(element);
-    });
-
-    return () => {
-      revealElements.forEach(element => {
-        revealObserver.unobserve(element);
-      });
-    };
-  }, []);
-
+function Home() {
   return (
     <>
       <Navbar />
@@ -51,5 +24,15 @@ export default function App() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
