@@ -1,7 +1,5 @@
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -11,7 +9,26 @@ import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 function Home() {
+  useEffect(() => {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    });
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -30,9 +47,9 @@ function Home() {
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Home />} />
     </Routes>
   );
 }
