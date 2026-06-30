@@ -29,6 +29,43 @@ export default function Gallery() {
       image: "/gallery-4.jpg",
       title: "Vibrant Heritage Silks",
       subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+    {
+      id: 5,
+      image: "/gallery-5.png",
+      title: "Vibrant Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+    {
+      id: 6,
+      image: "/gallery-6.png",
+      title: "Banaras Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+
+    {
+      id: 7,
+      image: "/gallery-7.png",
+      title: "Pattu Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+    {
+      id: 8,
+      image: "/gallery-8.png",
+      title: "silk  Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+    {
+      id: 9,
+      image: "/gallery-9.png",
+      title: "cotton-pattu Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
+    },
+    {
+      id: 10,
+      image: "/gallery-10.png",
+      title: "kalamkari Heritage Silks",
+      subtitle: "A showcase of premium dyed silks in custom royal shades"
     }
   ];
 
