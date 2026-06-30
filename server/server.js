@@ -9,7 +9,16 @@ const PORT = process.env.PORT || 5000;
 
 // Setup Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      origin.startsWith('http://localhost:') || 
+      origin.startsWith('http://127.0.0.1:')
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS policy mismatch'), false);
+  },
   credentials: true
 }));
 app.use(express.json());

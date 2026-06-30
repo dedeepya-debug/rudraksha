@@ -26,6 +26,7 @@ export default function ProductDetails() {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
   const [submittingReview, setSubmittingReview] = useState(false);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -50,6 +51,18 @@ export default function ProductDetails() {
           }
           if (data.product.sizes) setSelectedSize(data.product.sizes.split(',')[0]);
           if (data.product.colors) setSelectedColor(data.product.colors.split(',')[0]);
+
+          // Fetch related products
+          try {
+            const relRes = await fetch(`${API_URL}/products?category=${data.product.category}`);
+            const relData = await relRes.json();
+            if (relRes.ok) {
+              const filtered = (relData.products || []).filter(p => p.id !== data.product.id);
+              setRelatedProducts(filtered.slice(0, 4));
+            }
+          } catch (relErr) {
+            console.error("Failed to load related products:", relErr);
+          }
         } else {
           showToast(data.error || "Failed to load product details.", "error");
         }
@@ -401,6 +414,52 @@ Please provide more details.`;
         </div>
 
       </div>
+
+      {/* Related Products Section */}
+      {relatedProducts.length > 0 && (
+        <section className="section details-related-section" style={{ borderTop: '1px solid rgba(78, 52, 46, 0.06)', paddingBottom: '20px' }}>
+          <div className="container">
+            <h2 className="section-title">Related Collections</h2>
+            <div className="title-underline" style={{ margin: '10px auto 40px auto' }}></div>
+            
+            <div className="related-products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '24px' }}>
+              {relatedProducts.map(p => {
+                const finalP = p.price * (1 - p.discount / 100);
+                const hasD = p.discount > 0;
+                const img = p.images && p.images.length > 0 ? p.images[0] : (p.image || '/silk.png');
+
+                return (
+                  <div className="shop-product-card" key={p.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Link to={`/product/${p.id}`} className="card-img-link" onClick={() => window.scrollTo(0, 0)}>
+                      <div className="card-image-box" style={{ height: '220px' }}>
+                        <img src={img} alt={p.name} className="card-img" />
+                        {hasD && <div className="card-discount-badge">{p.discount}% OFF</div>}
+                      </div>
+                    </Link>
+                    
+                    <div className="card-details" style={{ padding: '16px' }}>
+                      <span className="card-category">{p.category}</span>
+                      <h3 className="card-name-title" style={{ fontSize: '1rem', marginBottom: '8px' }}>
+                        <Link to={`/product/${p.id}`} onClick={() => window.scrollTo(0, 0)}>{p.name}</Link>
+                      </h3>
+                      <div className="card-price-row">
+                        {hasD ? (
+                          <>
+                            <span className="discounted-price" style={{ fontSize: '0.95rem' }}>₹{finalP.toLocaleString()}</span>
+                            <span className="original-price" style={{ fontSize: '0.8rem' }}>₹{p.price.toLocaleString()}</span>
+                          </>
+                        ) : (
+                          <span className="normal-price" style={{ fontSize: '0.95rem' }}>₹{p.price.toLocaleString()}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Reviews Tab/Section */}
       <section className="section details-reviews-section">

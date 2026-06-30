@@ -33,39 +33,44 @@ export default function Gallery() {
     {
       id: 5,
       image: "/gallery-5.png",
-      title: "Vibrant Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Golden Kanjeevaram Saree",
+      subtitle: "Traditional silk weave with broad golden borders"
     },
     {
       id: 6,
       image: "/gallery-6.png",
-      title: "Banaras Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Mint Green Organza Saree",
+      subtitle: "Gold floral embroidery on pastel organza weave"
     },
-
     {
       id: 7,
       image: "/gallery-7.png",
-      title: "Pattu Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Royal Purple Paithani Saree",
+      subtitle: "Luxury silk featuring borders adorned with peacock designs"
     },
     {
       id: 8,
       image: "/gallery-8.png",
-      title: "silk  Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Rose Pink Chanderi Saree",
+      subtitle: "Sheer texture woven with rose coin motifs"
     },
     {
       id: 9,
       image: "/gallery-9.png",
-      title: "cotton-pattu Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Dhakai Jamdani Saree",
+      subtitle: "Premium cotton-silk Jamdani with golden floral weave"
     },
     {
       id: 10,
       image: "/gallery-10.png",
-      title: "kalamkari Heritage Silks",
-      subtitle: "A showcase of premium dyed silks in custom royal shades"
+      title: "Traditional Patola Silk Saree",
+      subtitle: "Double-ikat patterns in rich crimson, blue, and gold threads"
+    },
+    {
+      id: 11,
+      image: "/gallery-11.png",
+      title: "Lavender Sequinned Chiffon Saree",
+      subtitle: "Delicate silver sequins and hand-embroidered borders"
     }
   ];
 

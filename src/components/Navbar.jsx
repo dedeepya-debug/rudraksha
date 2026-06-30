@@ -27,6 +27,8 @@ export default function Navbar() {
     { name: 'Contact', path: '/contact', hash: '' }
   ];
 
+  const [activeSection, setActiveSection] = useState('home');
+
   // Close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event) {
@@ -45,10 +47,35 @@ export default function Navbar() {
       } else {
         setIsScrolled(false);
       }
+
+      if (location.pathname === '/') {
+        const sections = ['home', 'about', 'products', 'gallery'];
+        const scrollPosition = window.scrollY + 120;
+
+        for (const sectionId of sections) {
+          const el = document.getElementById(sectionId);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveSection(sectionId);
+              break;
+            }
+          }
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  const isLinkActive = (link) => {
+    if (location.pathname !== link.path) return false;
+    if (link.hash) {
+      return activeSection === link.hash.substring(1);
+    }
+    return true;
+  };
 
   const handleLinkClick = (e, link) => {
     setIsOpen(false);
@@ -99,12 +126,12 @@ export default function Navbar() {
                 <a
                   href={`${link.path}${link.hash}`}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className="nav-link"
+                  className={`nav-link ${isLinkActive(link) ? 'active' : ''}`}
                 >
                   {link.name}
                 </a>
               ) : (
-                <Link to={link.path} className="nav-link">
+                <Link to={link.path} className={`nav-link ${isLinkActive(link) ? 'active' : ''}`}>
                   {link.name}
                 </Link>
               )}
@@ -191,12 +218,12 @@ export default function Navbar() {
                 <a
                   href={`${link.path}${link.hash}`}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className="mobile-nav-link"
+                  className={`mobile-nav-link ${isLinkActive(link) ? 'active' : ''}`}
                 >
                   {link.name}
                 </a>
               ) : (
-                <Link to={link.path} className="mobile-nav-link" onClick={() => setIsOpen(false)}>
+                <Link to={link.path} className={`mobile-nav-link ${isLinkActive(link) ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
                   {link.name}
                 </Link>
               )}

@@ -33,8 +33,65 @@ function ScrollToTop() {
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
+    } else {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) {
+          const offset = 80; // height of sticky nav
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = target.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
     }
   }, [pathname, hash]);
+
+  return null;
+}
+
+// Reveal transitions manager on page change
+function RevealObserver() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    let observers = [];
+    
+    const timer = setTimeout(() => {
+      const revealElements = document.querySelectorAll('.reveal');
+      const observerOptions = {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      revealElements.forEach(element => {
+        revealObserver.observe(element);
+        observers.push({ element, observer: revealObserver });
+      });
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      observers.forEach(({ element, observer }) => {
+        observer.unobserve(element);
+      });
+    };
+  }, [pathname]);
 
   return null;
 }
@@ -70,57 +127,55 @@ function ProtectedUserRoute({ children }) {
 }
 
 export default function App() {
-  // Setup reveal transitions observer
-  useEffect(() => {
-    const revealElements = document.querySelectorAll('.reveal');
-    const observerOptions = {
-      root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    revealElements.forEach(element => {
-      revealObserver.observe(element);
-    });
-
-    return () => {
-      revealElements.forEach(element => {
-        revealObserver.unobserve(element);
-      });
-    };
-  }, []);
-
   return (
     <ToastProvider>
       <AuthProvider>
         <CartProvider>
           <WishlistProvider>
             <ScrollToTop />
+            <RevealObserver />
             <Navbar />
             
             <main style={{ minHeight: 'calc(100vh - 400px)' }}>
               <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/contact" element={<Contact />} />
+                {/* Protected catalog and core routes */}
+                <Route path="/" element={
+                  <ProtectedUserRoute>
+                    <Home />
+                  </ProtectedUserRoute>
+                } />
+                <Route path="/shop" element={
+                  <ProtectedUserRoute>
+                    <Shop />
+                  </ProtectedUserRoute>
+                } />
+                <Route path="/product/:id" element={
+                  <ProtectedUserRoute>
+                    <ProductDetails />
+                  </ProtectedUserRoute>
+                } />
+                <Route path="/contact" element={
+                  <ProtectedUserRoute>
+                    <Contact />
+                  </ProtectedUserRoute>
+                } />
+                
+                {/* Auth routes */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 
-                {/* Shopping Cart & Wishlist */}
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/wishlist" element={<Wishlist />} />
+                {/* Shopping Cart & Wishlist (Protected) */}
+                <Route path="/cart" element={
+                  <ProtectedUserRoute>
+                    <Cart />
+                  </ProtectedUserRoute>
+                } />
+                <Route path="/wishlist" element={
+                  <ProtectedUserRoute>
+                    <Wishlist />
+                  </ProtectedUserRoute>
+                } />
 
                 {/* Protected checkout & profile routes */}
                 <Route path="/checkout" element={
